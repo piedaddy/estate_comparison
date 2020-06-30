@@ -6,7 +6,9 @@ import Header from './Header/Header';
 function App() {
   return (
     <div className="App">
-      <div className="app app__title">Estate Comparison</div>
+      <div className="app__title">
+        <h1>Estate Comparison</h1>
+        </div>
       <Header />
       <SearchResults />
     </div>

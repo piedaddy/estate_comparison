@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
 import Results from "../Results/Results";
 import "./SearchResults.scss";
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 export default function SearchResults() {
   const [estateImages, setEstateImages] = useState([]);
   const [firstOffset, setFirstOffset] = useState(0);
   const [count, setCount] = useState(0);
-  // const [isLoaded, setIsLoaded] = useState(false);
   const [isLoadedA, setIsLoadedA] = useState(false);
   const [isLoadedB, setIsLoadedB] = useState(false);
-
-
-  const [aPriceLower, setAPriceLower] = useState(true);
-
   const [a, setA] = useState({});
   const [b, setB] = useState({});
+  // const [isA, setIsA] = useState(false);
+  // const [isB, setIsB] = useState(false);
+  const [idA, setIdA] = useState(0);
+  const [idB, setIdB] = useState(0);
   const secondOffset = firstOffset + 10;
-
   let showNext;
   let showPrevious;
+  let areSame;
+
 
   const getList = async () => {
     const response = await fetch(
@@ -28,7 +28,6 @@ export default function SearchResults() {
     );
     const data = await response.json();
     setEstateImages(data);
-
     console.log(data[0].images);
   };
 
@@ -42,33 +41,22 @@ export default function SearchResults() {
 
   const handleSetChoice = (est) => {
     setCount(count + 1);
-    if (count % 2 === 1) {
-      setB(est);
-      setIsLoadedB(true)
-      //compareResults();
-      console.log("b", b);
-    }
     if (count % 2 === 0) {
       setA(est);
+      setIdA(est.id);
+      // setIsA(!isA);
       setIsLoadedA(true);
-      //compareResults();
-
       console.log("a", a);
     }
-    console.log(count);
+    if (count % 2 === 1) {
+      setB(est);
+      setIdB(est.id);
+      // setIsB(!isB);
+      setIsLoadedB(true);
+      console.log("b", b);
+    }
+   
   };
-
-
-  // const compareResults = () => {
-  //   if(a.prize_czk > b.prize_czk) {
-  //     setAPriceLower(false);
-  //   }
-  //   if(a.prize_czk < b.prize_czk) {
-  //     setAPriceLower(true);
-  //   }
-  //   console.log('compare working')
-  // }; 
-
 
   useEffect(() => {
     getList();
@@ -78,17 +66,35 @@ export default function SearchResults() {
     const pics = est.images[0];
     const name = est.name_extracted;
     const place = est.locality;
+    areSame = a.id === b.id;
     showPrevious = firstOffset > 0;
     showNext = secondOffset < estateImages.length;
+    const isSelected = (setIsLoadedA || setIsLoadedB);
     return (
-      <div className="header header__photos" key={est.id}>
+      <div
+        className={`header__photos ${idA === est.id || idB === est.id ? "chosen" : ""}
+        }`}
+        key={est.id}
+      >
+
         <img
           src={pics}
           alt="Estate"
-          className="header header__photos photo"
-          onClick={() => {handleSetChoice(est);}}
-        ></img>
-        <p className="header header__photos description">
+          className={`photo`}
+          onClick={() => {
+            handleSetChoice(est);
+          }}
+        ></img>{" "}
+        {isSelected && (
+          <div className="header__letter-wrapper">
+            <div className="header__letter">
+              {/* <p> */}
+              {idA === est.id ? <p>A</p> : ""} {!areSame && idB === est.id ? <p>B</p> : ""}
+              {/* </p> */}
+            </div>
+          </div>
+        )}
+        <p className="description">
           {name} {place}
         </p>
       </div>
@@ -98,13 +104,10 @@ export default function SearchResults() {
   return (
     <div>
       <div className="header">
-        <div className="header header__list">
+        <div className="header__list">
           {showPrevious ? (
-            <div className="header header__button-container">
-              <ArrowBackIcon
-                className="header header__button button"
-                onClick={handleShowPreviousList}
-              />
+            <div className="header__button">
+              <ArrowBackIcon onClick={handleShowPreviousList} />
             </div>
           ) : (
             ""
@@ -113,17 +116,18 @@ export default function SearchResults() {
           {photos}
 
           {showNext ? (
-            <div className="header header__button-container">
-              <ArrowForwardIcon
-                className="header header__button button"
-                onClick={handleShowNextList}
-              />
+            <div className="header__button">
+              <ArrowForwardIcon onClick={handleShowNextList} />
             </div>
           ) : (
             ""
           )}
         </div>
-        {isLoadedA && isLoadedB ? <Results a={a} b={b} aPic={a.images} count={count}  /> : ""}
+        {isLoadedA && isLoadedB ? (
+          <Results a={a} b={b} aPic={a.images} count={count} areSame={areSame} />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

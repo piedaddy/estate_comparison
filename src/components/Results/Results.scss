@@ -1,3 +1,6 @@
+$green-color: rgba(77, 218, 77, 0.7);
+$red-color: rgba(235, 80, 80, 0.7);
+
 .results {
   display: flex;
   justify-content: center;
@@ -10,49 +13,55 @@
     flex-direction: column;
 
     &__image {
-      width: 20em;
+      width: 26em;
       height: auto;
     }
-  }
 
-  // &__image {
-  //   width: 5em;
-  //   height: auto;
-  // }
+    &__name {
+      margin: 0.5em 0;
+    }
 
-  .info {
-    display: flex;
-    flex-direction: column;
+    &__info {
+      display: flex;
+      flex-direction: column;
 
-    .info-items {
-      justify-content: space-between;
-
-      .title {
-        font-weight: bold;
+      sup {
+        font-size: 0.4em;
       }
-    }
 
-    &__price {
-    }
-     
-    .green {
-      background-color: rgb(94, 231, 94);
-    }
+      div {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.3em;
+        align-items: center;
+      }
 
-    .red {
-      background-color: rgb(240, 104, 133);
+      .items {
+        &__title {
+          font-weight: bold;
+        }
+      }
+      .green {
+        background-color: $green-color;
+      }
+
+      .red {
+        background-color: $red-color;
+      }
     }
   }
 
   .company {
-    justify-content: left;
+    display: flex;
+    flex-direction: row;
+    margin-top: 1em;
 
     &__logo {
-      width: 6em;
+      width: 5em;
       height: auto;
     }
     &__name {
-      margin-left:1em;
+      margin-left: 1em;
       align-self: center;
     }
   }
@@ -60,9 +69,4 @@
   .identical-response {
     align-self: center;
   }
-}
-
-.results_b {
-  border: 1px solid pink;
-  margin: 1em;
 }
