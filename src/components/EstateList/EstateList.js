@@ -60,9 +60,11 @@ export default function SearchResults() {
     showPrevious = firstOffset > 0;
     showNext = secondOffset < estateImages.length;
     const isSelected = setIsLoadedA || setIsLoadedB;
+    const showLetterB = idB === est.id;
+    const showLetterA = idA === est.id;
     return (
       <div
-        className={`list__photos ${ idA === est.id || idB === est.id ? "chosen" : ""}`}
+        className={`list__photos ${ showLetterA || showLetterB ? "chosen" : ""}`}
         key={est.id}
       >
         <img
@@ -76,8 +78,8 @@ export default function SearchResults() {
         {isSelected && (
           <div className="list__letter-wrapper">
             <div className="list__letter">
-              {idA === est.id ? <p>A</p> : ""}
-              {!areSame && idB === est.id ? <p>B</p> : ""}
+              {showLetterA ? <p>A</p> : ""}
+              {!areSame && showLetterB ? <p>B</p> : ""}
             </div>
           </div>
         )}

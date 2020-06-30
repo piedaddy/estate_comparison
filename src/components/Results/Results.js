@@ -1,38 +1,38 @@
 import React, { useEffect, useState } from "react";
-import AResults from "./AResults";
-import BResults from "./BResults";
+import ResultsA from "./ResultsA";
+import ResultsB from "./ResultsB";
 
 import "./Results.scss";
 
 export default function Results({ estateA, estateB, count, areSame }) {
-  const [aPriceLower, setAPriceLower] = useState(true);
-  const [aFloorSmaller, setAFloorSmaller] = useState(true);
-  const [aLandSmaller, setALandSmaller] = useState(true);
-  let aPrice = estateA.prize_czk;
-  let bPrice = estateB.prize_czk;
-  let aFloor = parseInt(estateA.building_area);
-  let bFloor = parseInt(estateB.building_area);
-  let aLand = parseInt(estateA.land_area);
-  let bLand = parseInt(estateB.land_area);
+  const [priceLowerA, setPriceLowerA] = useState(true);
+  const [floorSmallerA, setFloorSmallerA] = useState(true);
+  const [landSmallerA, setLandSmallerA] = useState(true);
+  let priceA = estateA.prize_czk;
+  let priceB = estateB.prize_czk;
+  let floorA = parseInt(estateA.building_area);
+  let floorB = parseInt(estateB.building_area);
+  let landA = parseInt(estateA.land_area);
+  let landB = parseInt(estateB.land_area);
 
   const compareResults = () => {
-    if (aPrice > bPrice) {
-      setAPriceLower(false);
+    if (priceA > priceB) {
+      setPriceLowerA(false);
     }
-    if (aPrice < bPrice) {
-      setAPriceLower(true);
+    if (priceA < priceB) {
+      setPriceLowerA(true);
     }
-    if (aFloor > bFloor) {
-      setAFloorSmaller(false);
+    if (floorA > floorB) {
+      setFloorSmallerA(false);
     }
-    if (aFloor < bFloor) {
-      setAFloorSmaller(true);
+    if (floorA < floorB) {
+      setFloorSmallerA(true);
     }
-    if (aLand > bLand) {
-      setALandSmaller(false);
+    if (landA > landB) {
+      setLandSmallerA(false);
     }
-    if (aLand < bLand) {
-      setALandSmaller(true);
+    if (landA < landB) {
+      setLandSmallerA(true);
     }
   };
 
@@ -42,25 +42,24 @@ export default function Results({ estateA, estateB, count, areSame }) {
 
   return (
     <div className="results">
-      <AResults
+      <ResultsA
         estateA={estateA}
-        aLandSmaller={aLandSmaller}
-        aFloorSmaller={aFloorSmaller}
-        aPriceLower={aPriceLower}
+        priceLowerA={priceLowerA}
+        floorSmallerA={floorSmallerA}
+        landSmallerA={landSmallerA}
       />
       {!areSame ? (
-        <BResults
-         estateB={estateB}
-          aLandSmaller={aLandSmaller}
-          aFloorSmaller={aFloorSmaller}
-          aPriceLower={aPriceLower}
+        <ResultsB
+          estateB={estateB}
+          priceLowerA={priceLowerA}
+          floorSmallerA={floorSmallerA}
+          landSmallerA={landSmallerA}
         />
       ) : (
         <div className="identical-response">
-          Please pick another estate.
+          Please pick another estate listing.
         </div>
       )}
     </div>
   );
 }
-

@@ -1,11 +1,11 @@
 import React from "react";
 import "./Results.scss";
 
-export default function AResults({
+export default function ResultsA({
   estateA,
-  aFloorSmaller,
-  aPriceLower,
-  aLandSmaller,
+  priceLowerA,
+  floorSmallerA,
+  landSmallerA,
 }) {
 
   const priceWithSpaces = (x) => {
@@ -24,7 +24,7 @@ export default function AResults({
       )}
       <p className="result__name">{estateA.name}</p>
       <div className="result__info">
-        <div className={`items__price  ${aPriceLower ? "green" : "red"}`}>
+        <div className={`items__price  ${priceLowerA ? "green" : "red"}`}>
           <p className="items__title">Price </p>
           <p>{price} Kč</p>
         </div>
@@ -32,13 +32,13 @@ export default function AResults({
           <p className="items__title">Locality </p>
           <p>{estateA.locality}</p>
         </div>
-        <div className={`items__floor ${aFloorSmaller ? "red" : "green"}`}>
+        <div className={`items__floor ${floorSmallerA ? "red" : "green"}`}>
           <p className="items__title">Floor area </p>
           <p>
             {estateA.building_area} m<sup>2</sup>
           </p>
         </div>
-        <div className={`items__land ${aLandSmaller ? "red" : "green"}`}>
+        <div className={`items__land ${landSmallerA ? "red" : "green"}`}>
           <p className="items__title">Land area </p>
           <p>
             {estateA.land_area} m<sup>2</sup>
