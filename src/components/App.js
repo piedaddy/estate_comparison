@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.scss';
-import SearchResults from './SearchResults/SearchResults';
-import Header from './Header/Header';
+import EstateList from './EstateList/EstateList';
 
 function App() {
   return (
@@ -9,8 +8,7 @@ function App() {
       <div className="app__title">
         <h1>Estate Comparison</h1>
         </div>
-      <Header />
-      <SearchResults />
+      <EstateList />
     </div>
   );
 }

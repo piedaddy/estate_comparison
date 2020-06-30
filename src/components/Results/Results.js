@@ -4,17 +4,16 @@ import BResults from "./BResults";
 
 import "./Results.scss";
 
-export default function Results({ a, b, count, areSame }) {
+export default function Results({ estateA, estateB, count, areSame }) {
   const [aPriceLower, setAPriceLower] = useState(true);
   const [aFloorSmaller, setAFloorSmaller] = useState(true);
   const [aLandSmaller, setALandSmaller] = useState(true);
-  // const areSame = a.id === b.id;
-  let aPrice = a.prize_czk;
-  let bPrice = b.prize_czk;
-  let aFloor = parseInt(a.building_area);
-  let bFloor = parseInt(b.building_area);
-  let aLand = parseInt(a.land_area);
-  let bLand = parseInt(b.land_area);
+  let aPrice = estateA.prize_czk;
+  let bPrice = estateB.prize_czk;
+  let aFloor = parseInt(estateA.building_area);
+  let bFloor = parseInt(estateB.building_area);
+  let aLand = parseInt(estateA.land_area);
+  let bLand = parseInt(estateB.land_area);
 
   const compareResults = () => {
     if (aPrice > bPrice) {
@@ -44,14 +43,14 @@ export default function Results({ a, b, count, areSame }) {
   return (
     <div className="results">
       <AResults
-        a={a}
+        estateA={estateA}
         aLandSmaller={aLandSmaller}
         aFloorSmaller={aFloorSmaller}
         aPriceLower={aPriceLower}
       />
       {!areSame ? (
         <BResults
-          b={b}
+         estateB={estateB}
           aLandSmaller={aLandSmaller}
           aFloorSmaller={aFloorSmaller}
           aPriceLower={aPriceLower}

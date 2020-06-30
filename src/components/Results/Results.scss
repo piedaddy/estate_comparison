@@ -8,12 +8,12 @@ $red-color: rgba(235, 80, 80, 0.7);
   .result {
     border: 1px solid black;
     margin: 1em;
-    padding: 1em;
+    padding: .5em;
     display: flex;
     flex-direction: column;
 
     &__image {
-      width: 26em;
+      width: 23em;
       height: auto;
     }
 
