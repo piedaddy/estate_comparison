@@ -1,0 +1,28 @@
+.results{
+  display:flex;
+  justify-content: center;
+}
+
+.results_a {
+  border: 1px solid black;
+  margin: 1em;
+  /* height:10em; */
+}
+
+.results_b {
+  border: 1px solid pink;
+  margin: 1em;
+
+}
+
+.results_estate_image {
+  width: 4em;
+  height: 2em;
+}
+
+.results_image {
+  width: 4em;
+  height: 2em;
+  background-color: aliceblue;
+
+}
