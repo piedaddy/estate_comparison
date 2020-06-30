@@ -1,0 +1,68 @@
+.results {
+  display: flex;
+  justify-content: center;
+
+  .result {
+    border: 1px solid black;
+    margin: 1em;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+
+    &__image {
+      width: 20em;
+      height: auto;
+    }
+  }
+
+  // &__image {
+  //   width: 5em;
+  //   height: auto;
+  // }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+
+    .info-items {
+      justify-content: space-between;
+
+      .title {
+        font-weight: bold;
+      }
+    }
+
+    &__price {
+    }
+     
+    .green {
+      background-color: rgb(94, 231, 94);
+    }
+
+    .red {
+      background-color: rgb(240, 104, 133);
+    }
+  }
+
+  .company {
+    justify-content: left;
+
+    &__logo {
+      width: 6em;
+      height: auto;
+    }
+    &__name {
+      margin-left:1em;
+      align-self: center;
+    }
+  }
+
+  .identical-response {
+    align-self: center;
+  }
+}
+
+.results_b {
+  border: 1px solid pink;
+  margin: 1em;
+}

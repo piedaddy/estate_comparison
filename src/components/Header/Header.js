@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import './Header.scss';
 
 export default function Header () {
   const [estateImages, setEstateImages] = useState([]);
