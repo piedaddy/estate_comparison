@@ -22,7 +22,9 @@ export default function EstateList() {
   let areSame;
 
   const getList = async () => {
-    const response = await fetch("https://estate-comparison.codeboot.cz/list.php");
+    const response = await fetch(
+      "https://estate-comparison.codeboot.cz/list.php"
+    );
     const data = await response.json();
     setEstateImages(data);
   };
@@ -53,45 +55,49 @@ export default function EstateList() {
     getList();
   }, []);
 
-  const estateImageList = estateImages.slice(firstOffset, secondOffset).map((estate) => {
-    const estatePic = estate.images[0];
-    const name = estate.name_extracted;
-    const place = estate.locality;
-    areSame = estateA.id === estateB.id;
-    showPrevious = firstOffset > 0;
-    showNext = secondOffset < estateImages.length;
-    const isSelected = setIsLoadedA || setIsLoadedB;
-    const showLetterB = idB === estate.id;
-    const showLetterA = idA === estate.id;
-    return (
-      <div
-        className={`list__photos ${ showLetterA || showLetterB ? "chosen" : ""}`}
-        key={estate.id}
-      >
-        <img
-          src={estatePic}
-          alt="Estate"
-          className={`photo`}
-          onClick={() => {
-            handleSetChoice(estate);
-          }}
-        ></img>
-        {isSelected && (
-          <div className="list__letter-wrapper">
-            <div className="list__letter">
-              {showLetterA ? <p>A</p> : ""}
-              {!areSame && showLetterB ? <p>B</p> : ""}
+  const estateImageList = estateImages
+    .slice(firstOffset, secondOffset)
+    .map((estate) => {
+      const estatePic = estate.images[0];
+      const name = estate.name_extracted;
+      const place = estate.locality;
+      areSame = estateA.id === estateB.id;
+      showPrevious = firstOffset > 0;
+      showNext = secondOffset < estateImages.length;
+      const isSelected = setIsLoadedA || setIsLoadedB;
+      const showLetterB = idB === estate.id;
+      const showLetterA = idA === estate.id;
+      return (
+        <div
+          className={`list__photos ${
+            showLetterA || showLetterB ? "chosen" : ""
+          }`}
+          key={estate.id}
+        >
+          <img
+            src={estatePic}
+            alt="Estate"
+            className={`photo`}
+            onClick={() => {
+              handleSetChoice(estate);
+            }}
+          ></img>
+          {isSelected && (
+            <div className="list__letter-wrapper">
+              <div className="list__letter">
+                {showLetterA ? <p>A</p> : ""}
+                {!areSame && showLetterB ? <p>B</p> : ""}
+              </div>
             </div>
+          )}
+          <div className="description">
+            <p>
+              {name} {place}
+            </p>
           </div>
-        )}
-        <div className="description">
-          <p>
-            {name} {place}
-          </p>
         </div>
-      </div>
-    );
-  });
+      );
+    });
 
   return (
     <div>

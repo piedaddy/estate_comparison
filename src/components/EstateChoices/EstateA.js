@@ -7,7 +7,6 @@ export default function EstateA({
   floorSmallerA,
   landSmallerA,
 }) {
-
   const priceWithSpaces = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   };
@@ -17,7 +16,11 @@ export default function EstateA({
     <div className="estate">
       {estateA.images ? (
         <div className="estate__imageWrapper">
-          <img className="estate__image" src={estateA.images[0]} alt="estate"></img>
+          <img
+            className="estate__image"
+            src={estateA.images[0]}
+            alt="estate"
+          ></img>
         </div>
       ) : (
         ""
@@ -55,7 +58,11 @@ export default function EstateA({
         ) : (
           ""
         )}
-        {estateA.company_name ? <p className="company__name">{estateA.company_name}</p> : ""}
+        {estateA.company_name ? (
+          <p className="company__name">{estateA.company_name}</p>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

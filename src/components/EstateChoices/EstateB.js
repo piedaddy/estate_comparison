@@ -5,7 +5,7 @@ export default function EstateB({
   estateB,
   priceLowerA,
   floorSmallerA,
-  landSmallerA
+  landSmallerA,
 }) {
   //convert price integer into integer representing currency
   const numberWithSpaces = (x) => {
@@ -17,7 +17,11 @@ export default function EstateB({
     <div className="estate">
       {estateB.images ? (
         <div className="estate__imageWrapper">
-          <img className="estate__image" src={estateB.images[0]} alt="estate"></img>
+          <img
+            className="estate__image"
+            src={estateB.images[0]}
+            alt="estate"
+          ></img>
         </div>
       ) : (
         ""
