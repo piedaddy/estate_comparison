@@ -4,14 +4,15 @@ import "./EstateList.scss";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
-export default function SearchResults() {
+export default function EstateList() {
   const [estateImages, setEstateImages] = useState([]);
   const [firstOffset, setFirstOffset] = useState(0);
-  const [count, setCount] = useState(0);
   const [isLoadedA, setIsLoadedA] = useState(false);
   const [isLoadedB, setIsLoadedB] = useState(false);
   const [estateA, setEstateA] = useState({});
   const [estateB, setEstateB] = useState({});
+  //count is used to determine which click represents estate A and estate B
+  const [count, setCount] = useState(0);
   //idA and idB are used to ensure only selected estates have a styling change
   const [idA, setIdA] = useState(0);
   const [idB, setIdB] = useState(0);
@@ -34,16 +35,16 @@ export default function SearchResults() {
     setFirstOffset(firstOffset - 10);
   };
 
-  const handleSetChoice = (est) => {
+  const handleSetChoice = (estate) => {
     setCount(count + 1);
     if (count % 2 === 0) {
-      setEstateA(est);
-      setIdA(est.id);
+      setEstateA(estate);
+      setIdA(estate.id);
       setIsLoadedA(true);
     }
     if (count % 2 === 1) {
-      setEstateB(est);
-      setIdB(est.id);
+      setEstateB(estate);
+      setIdB(estate.id);
       setIsLoadedB(true);
     }
   };
@@ -52,27 +53,27 @@ export default function SearchResults() {
     getList();
   }, []);
 
-  const photos = estateImages.slice(firstOffset, secondOffset).map((est) => {
-    const pics = est.images[0];
-    const name = est.name_extracted;
-    const place = est.locality;
+  const estateImageList = estateImages.slice(firstOffset, secondOffset).map((estate) => {
+    const estatePic = estate.images[0];
+    const name = estate.name_extracted;
+    const place = estate.locality;
     areSame = estateA.id === estateB.id;
     showPrevious = firstOffset > 0;
     showNext = secondOffset < estateImages.length;
     const isSelected = setIsLoadedA || setIsLoadedB;
-    const showLetterB = idB === est.id;
-    const showLetterA = idA === est.id;
+    const showLetterB = idB === estate.id;
+    const showLetterA = idA === estate.id;
     return (
       <div
         className={`list__photos ${ showLetterA || showLetterB ? "chosen" : ""}`}
-        key={est.id}
+        key={estate.id}
       >
         <img
-          src={pics}
+          src={estatePic}
           alt="Estate"
           className={`photo`}
           onClick={() => {
-            handleSetChoice(est);
+            handleSetChoice(estate);
           }}
         ></img>
         {isSelected && (
@@ -104,7 +105,7 @@ export default function SearchResults() {
             ""
           )}
 
-          {photos}
+          {estateImageList}
 
           {showNext ? (
             <div className="list__button">
