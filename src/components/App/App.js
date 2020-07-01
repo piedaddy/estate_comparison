@@ -1,6 +1,6 @@
 import React from 'react';
+import EstateList from '../EstateList/EstateList';
 import './App.scss';
-import EstateList from './EstateList/EstateList';
 
 function App() {
   return (

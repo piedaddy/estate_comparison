@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Results from "../Results/Results";
+import EstateChoices from "../EstateChoices/EstateChoices";
 import "./EstateList.scss";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
@@ -116,7 +116,7 @@ export default function EstateList() {
           )}
         </div>
         {isLoadedA && isLoadedB ? (
-          <Results
+          <EstateChoices
             estateA={estateA}
             estateB={estateB}
             imageA={estateA.images}

@@ -1,7 +1,7 @@
 import React from "react";
-import "./Results.scss";
+import "./EstateChoices.scss";
 
-export default function ResultsB({
+export default function EstateB({
   estateB,
   priceLowerA,
   floorSmallerA,
@@ -14,16 +14,16 @@ export default function ResultsB({
   const price = numberWithSpaces(estateB.prize_czk);
 
   return (
-    <div className="result">
+    <div className="estate">
       {estateB.images ? (
-        <div className="result__images">
-          <img className="result__image" src={estateB.images[0]} alt="estate"></img>
+        <div className="estate__imageWrapper">
+          <img className="estate__image" src={estateB.images[0]} alt="estate"></img>
         </div>
       ) : (
         ""
       )}
-      <p className="result__name">{estateB.name}</p>
-      <div className="result__info">
+      <p className="estate__name">{estateB.name}</p>
+      <div className="estate__info">
         <div className={`items__price ${priceLowerA ? "red" : "green"}`}>
           <p className="items__title">Price </p>
           <p>{price} Kč</p>

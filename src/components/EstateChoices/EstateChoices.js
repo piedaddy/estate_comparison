@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import ResultsA from "./ResultsA";
-import ResultsB from "./ResultsB";
+import EstateA from "./EstateA";
+import EstateB from "./EstateB";
+import "./EstateChoices.scss";
 
-import "./Results.scss";
-
-export default function Results({ estateA, estateB, count, areSame }) {
+export default function EstateChoices({ estateA, estateB, count, areSame }) {
   const [priceLowerA, setPriceLowerA] = useState(true);
   const [floorSmallerA, setFloorSmallerA] = useState(true);
   const [landSmallerA, setLandSmallerA] = useState(true);
@@ -15,7 +14,7 @@ export default function Results({ estateA, estateB, count, areSame }) {
   let landA = parseInt(estateA.land_area);
   let landB = parseInt(estateB.land_area);
 
-  const compareResults = () => {
+  const compareEstates = () => {
     if (priceA > priceB) {
       setPriceLowerA(false);
     }
@@ -37,19 +36,19 @@ export default function Results({ estateA, estateB, count, areSame }) {
   };
 
   useEffect(() => {
-    compareResults();
+    compareEstates();
   }, [count]);
 
   return (
-    <div className="results">
-      <ResultsA
+    <div className="estates">
+      <EstateA
         estateA={estateA}
         priceLowerA={priceLowerA}
         floorSmallerA={floorSmallerA}
         landSmallerA={landSmallerA}
       />
       {!areSame ? (
-        <ResultsB
+        <EstateB
           estateB={estateB}
           priceLowerA={priceLowerA}
           floorSmallerA={floorSmallerA}
